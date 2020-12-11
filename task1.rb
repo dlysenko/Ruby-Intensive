@@ -27,5 +27,20 @@ end
 angle2 = minutes.to_f/60*360
 # find angle between 00:00 and minute hand
 angle_difference = angle2 - angle1
+#puts angle_difference
 
-puts "\nThe angle between the hours and the minutes hands is #{angle_difference.round(3)} degrees"
+#lets get rid of negative angle and angle more > 180 degrees. user_friendly_angle will be in 0..180 degrees range
+case angle_difference
+when -360...-180
+  user_friendly_angle = 360 + angle_difference
+when -180...0
+  user_friendly_angle = angle_difference.abs
+when 0...180
+  user_friendly_angle = angle_difference
+when 180...360
+  user_friendly_angle = 360 - angle_difference
+else
+  print "Could be some error"
+end
+
+puts "\nThe angle between the hours and the minutes hands is #{user_friendly_angle.round(2)} degrees"
